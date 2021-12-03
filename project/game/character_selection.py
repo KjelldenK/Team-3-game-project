@@ -12,9 +12,7 @@ class Character_Selection_View(arcade.View):
         self.test_ship = Player_Test_Ship()
         self.test_ship2 = Player_Test_Ship2()
 
-    
-        self.ship_list = [self.test_ship]
-        self.ship_list = [self.test_ship2]
+        self.ship_list = [self.test_ship, self.test_ship2]
         
 
     def on_draw(self):
