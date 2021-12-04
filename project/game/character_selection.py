@@ -2,6 +2,7 @@ import arcade
 from arcade.text_pyglet import FontNameOrNames
 from game.player_text_ship import Player_Test_Ship
 from game.player_text_ship2 import Player_Test_Ship2
+from game.player_text_ship3 import Player_Test_Ship3
 from game import constants
 from game.gameview import GameView
 class Character_Selection_View(arcade.View):
@@ -11,8 +12,9 @@ class Character_Selection_View(arcade.View):
         self.ship_number = 0
         self.test_ship = Player_Test_Ship()
         self.test_ship2 = Player_Test_Ship2()
+        self.test_ship3 = Player_Test_Ship3()
 
-        self.ship_list = [self.test_ship, self.test_ship2]
+        self.ship_list = [self.test_ship, self.test_ship2, self.test_ship3]
         
 
     def on_draw(self):
