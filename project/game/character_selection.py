@@ -1,7 +1,12 @@
 import arcade
 from arcade.text_pyglet import FontNameOrNames
 from game.player_text_ship import Player_Test_Ship
+<<<<<<< HEAD
 from game.marcos_ship import Marcos_Ship
+=======
+from game.player_text_ship2 import Player_Test_Ship2
+from game.player_text_ship3 import Player_Test_Ship3
+>>>>>>> 6bfbd68c15b284fff0dc9931ee3701487d095ea4
 from game import constants
 from game.gameview import GameView
 class Character_Selection_View(arcade.View):
@@ -10,9 +15,14 @@ class Character_Selection_View(arcade.View):
         self.menu_Background = "project\images\menu_background.jpg"
         self.ship_number = 0
         self.test_ship = Player_Test_Ship()
+<<<<<<< HEAD
         self.test_ship2 = Marcos_Ship()
+=======
+        self.test_ship2 = Player_Test_Ship2()
+        self.test_ship3 = Player_Test_Ship3()
+>>>>>>> 6bfbd68c15b284fff0dc9931ee3701487d095ea4
 
-        self.ship_list = [self.test_ship, self.test_ship2]
+        self.ship_list = [self.test_ship, self.test_ship2, self.test_ship3]
         
 
     def on_draw(self):
