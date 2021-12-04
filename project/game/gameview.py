@@ -18,6 +18,8 @@ class GameView(arcade.View):
         self.enemy_list = None
         self.bullet_list = None
         self.menu_Background = "project\images\Backgrounds\darkPurple.png"
+        self.death_sound = arcade.load_sound("project\sounds\death_sound.ogg")
+        self.enemy_death_sound = arcade.load_sound("project\sounds\enemy_death.ogg")
         self.score = 0
         self.wave = 1
         self.lives = 3
@@ -127,6 +129,7 @@ class GameView(arcade.View):
             for alien in hit_list:
                 self.score += alien.get_value()
                 alien.remove_from_sprite_lists()
+                arcade.play_sound(self.enemy_death_sound)
 
             if bullet.top > constants.SCREEN_HEIGHT:
                 bullet.remove_from_sprite_lists()
@@ -140,6 +143,7 @@ class GameView(arcade.View):
             if len(hit_list) > 0:
                 bullet.remove_from_sprite_lists()
                 self.lives -= 1
+                arcade.play_sound(self.death_sound)
 
             if bullet.top < 0:
                 bullet.remove_from_sprite_lists() 
