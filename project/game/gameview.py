@@ -1,7 +1,6 @@
 import arcade
-from arcade import hitbox
-from game.player_text_ship import Player_Test_Ship
 from game.testing_alien import Tesing_Alien
+import game.menu
 from game import constants
 import random
 
@@ -20,6 +19,9 @@ class GameView(arcade.View):
         self.bullet_list = None
         self.menu_Background = "project\images\Backgrounds\darkPurple.png"
         self.score = 0
+        self.wave = 1
+        self.lives = 3
+
 
         self.set_up(ship)
         
@@ -34,7 +36,7 @@ class GameView(arcade.View):
 
         # sets up the player sprites
         self.player_list = arcade.SpriteList()
-        ########self.bullet_list = arcade.SpriteList()
+        
 
         # creates the player 
         self.player = ship
@@ -85,7 +87,10 @@ class GameView(arcade.View):
         self.player_list.draw()
         self.bullet_list.draw()
         self.alian_ships.draw()
+        self.alian_bullet_list.draw()
         arcade.draw_text(f"Score: {self.score}",10 , constants.SCREEN_HEIGHT / 50, arcade.color.WHITE, font_size=15, font_name = "Kenney Rocket")
+        arcade.draw_text(f"lives: {self.lives}",600 , constants.SCREEN_HEIGHT / 50, arcade.color.WHITE, font_size=15, font_name = "Kenney Rocket")
+
 
     def on_update(self, delta_time):
         
@@ -93,8 +98,24 @@ class GameView(arcade.View):
         self.alian_ships.on_update(delta_time)
         self.player_list.update()
         self.bullet_list.update()
+        self.alian_bullet_list.update()
         # checks to see if there was a collision
         
+        #make the alians shoot at random times
+
+        for alian in self.alian_ships:
+            
+            odds = int(250 * (1 /60) / delta_time)
+
+            if random.randrange(odds) == 0:
+                bullet = arcade.Sprite(alian.bullet_type)
+                bullet.center_x = alian.center_x
+                bullet.top = alian.bottom
+                bullet.angle = 180
+                bullet.change_y = -5
+                self.alian_bullet_list.append(bullet)
+
+
 
         for bullet in self.bullet_list:
         
@@ -111,8 +132,17 @@ class GameView(arcade.View):
                 bullet.remove_from_sprite_lists()
             
             
-                    
+            
+        for bullet in self.alian_bullet_list:
 
+            hit_list = arcade.check_for_collision_with_list(bullet, self.player_list)
+
+            if len(hit_list) > 0:
+                bullet.remove_from_sprite_lists()
+                self.lives -= 1
+
+            if bullet.top < 0:
+                bullet.remove_from_sprite_lists() 
 
         # checks to see if there are any more alians and if there is not reset them
         if len(self.alian_ships) == 0:
@@ -136,6 +166,10 @@ class GameView(arcade.View):
                 self.open_spot.remove(enemy_spot)
                 i += 1
         
+        # if you run out of lives go back to the menu this will change later
+        if self.lives <= 0:
+            menu = game.menu.MenuView()
+            self.window.show_view(menu)
 
 
 

@@ -11,10 +11,11 @@ class Tesing_Alien(Entity):
         self.alian_speed = 20
         self._score = 10
         self.timer = 0
+        self.bullet_type = "project\images\enemy ships\laserRed06.png"
 
 
     def on_update(self, delta_time):
-
+        # moves the alians side to side and moves them down at the end of each movement
         if self.timer < 4:
             self.center_x += self.alian_speed * delta_time
             self.timer + 1 * delta_time

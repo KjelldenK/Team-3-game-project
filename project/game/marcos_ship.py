@@ -34,6 +34,8 @@ class Marcos_Ship(Ship):
 
         self.time_since_last_firing += 1 * delta_time
 
+
+        # makes this ship shoot 3 shots 
         if self.shooting == True:
             if self.time_since_last_firing > self._attack_speed:
                 self.bullet = arcade.Sprite("project\images\Lasers\laserBlue01.png", scale= 0.5)
