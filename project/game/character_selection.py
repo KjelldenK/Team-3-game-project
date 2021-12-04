@@ -9,7 +9,7 @@ from game.gameview import GameView
 class Character_Selection_View(arcade.View):
     def __init__(self):
         super().__init__()
-        self.menu_Background = "project\images\menu_background.jpg"
+        self.menu_Background = "project\images\Backgrounds\darkPurple.png"
         self.ship_number = 0
         self.test_ship = Player_Test_Ship()
 

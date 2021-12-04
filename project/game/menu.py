@@ -11,7 +11,7 @@ class MenuView(arcade.View):
     def __init__(self):
         super().__init__()
         self.play_button = False
-        self.menu_Background = "project\images\menu_background.jpg"
+        self.menu_Background = "project\images\Backgrounds\darkPurple.png"
         self.Play_Button = "project\images\playbutton.png"
         self.play_hover = False
 
