@@ -7,7 +7,8 @@ class Player_Test_Ship(Ship):
     # this is the testing player ship this is one of many ships the will be in the game
     def __init__(self):
         super().__init__("project\images\Player ships\playerShip1_red.png")
-        
+        self._ship_name = "The Kesttrel"
+        self._ships_special = "The base ship avrage in all areas"
         self.time_since_last_firing = 1.0 
         self._attack_speed = 0.2
         self._ship_speed = 250

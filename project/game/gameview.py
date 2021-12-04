@@ -115,6 +115,8 @@ class GameView(arcade.View):
 
         # checks to see if there are any more alians and if there is not reset them
         if len(self.alian_ships) == 0:
+
+            
             i = 0
             while i < 20:
 

@@ -7,7 +7,8 @@ class Ship(Entity):
     # a sub class of entity that helps make ship type objects
     def __init__(self, texture):
         super().__init__(texture, scale= constants.SHIP_SPRITE_SCALING)
-
+        self._ship_name = None
+        self._ships_special = None
         self._ship_texture = texture
         self._attack_speed = 5
         self._ship_speed = 150
@@ -34,6 +35,12 @@ class Ship(Entity):
         # returns the texture of the ship
         return self._ship_texture
 
+    def get_ship_name(self):
+        return self._ship_name
+
+    def get_ships_special(self):
+        return self._ships_special
+
     def action(self, ship_action, status):
         # takes in input from the game and turns it into player actions
         if ship_action == "right":
@@ -44,6 +51,8 @@ class Ship(Entity):
 
         if ship_action == "shoot":
             self.shooting = status
+
+
         
 
     def get_bullet_list(self):
