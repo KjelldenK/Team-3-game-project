@@ -38,7 +38,7 @@ class GameView(arcade.View):
 
         # creates the player 
         self.player = ship
-        self.player.center_x = 450
+        self.player.center_x = constants.SCREEN_WIDTH / 2 
         self.player.center_y = 100
         self.player_list.append(self.player)
 
@@ -50,30 +50,30 @@ class GameView(arcade.View):
         self.time_between_shooting = self.player.get_attack_speed()
 
         # makes the grid for the enemys to spawn on
-        open_spot = []
+        self.open_spot = []
         
         
-        for y in range(300, 600, 50):
-            for x in range(200, 700, 50):
-                open_spot.append([x, y])
+        for y in range(400, 701, 50):
+            for x in range(100, 701, 50):
+                self.open_spot.append([x, y])
                 
 
-        taken_spot = []
+        self.taken_spot = []
 
         # starts by making wave one of the game
         i = 0
-        while i < len(open_spot) + len(taken_spot):
+        while i < 5:
 
             self.alian = Tesing_Alien("project\images\enemy ships\enemyBlack1.png",
             scale= 0.5, 
             alian_bullet_list= self.alian_bullet_list,
             time_between_firing= 15)
-            enemy_spot = open_spot[random.randint(0, len(open_spot) - 1)]
+            enemy_spot = self.open_spot[random.randint(0, len(self.open_spot) - 1)]
             self.alian.center_y = enemy_spot[1]
             self.alian.center_x = enemy_spot[0]
             self.alian_ships.append(self.alian)
-            taken_spot.append(enemy_spot)
-            open_spot.remove(enemy_spot)
+            self.taken_spot.append(enemy_spot)
+            self.open_spot.remove(enemy_spot)
             i += 1
 
 
@@ -90,10 +90,11 @@ class GameView(arcade.View):
     def on_update(self, delta_time):
         
         self.player_list.on_update(delta_time)
+        self.alian_ships.on_update(delta_time)
         self.player_list.update()
         self.bullet_list.update()
-        
         # checks to see if there was a collision
+        
 
         for bullet in self.bullet_list:
         
@@ -116,18 +117,24 @@ class GameView(arcade.View):
         # checks to see if there are any more alians and if there is not reset them
         if len(self.alian_ships) == 0:
 
-            
-            i = 0
-            while i < 20:
+            for spot in self.taken_spot:
+                self.open_spot.append(spot)
+                self.taken_spot.remove(spot)
 
-                alian = Tesing_Alien("project\images\enemy ships\enemyBlack1.png",
+            i = 0
+            while i < 10:
+
+                self.alian = Tesing_Alien("project\images\enemy ships\enemyBlack1.png",
                 scale= 0.5, 
                 alian_bullet_list= self.alian_bullet_list,
-                time_between_firing= 10)
-                alian.center_y = random.randrange(100, 601, 50)
-                alian.center_x = random.randrange(100, 601, 50)
-                self.alian_ships.append(alian)
-                i += 1 
+                time_between_firing= 15)
+                enemy_spot = self.open_spot[random.randint(0, len(self.open_spot) - 1)]
+                self.alian.center_y = enemy_spot[1]
+                self.alian.center_x = enemy_spot[0]
+                self.alian_ships.append(self.alian)
+                self.taken_spot.append(enemy_spot)
+                self.open_spot.remove(enemy_spot)
+                i += 1
         
 
 

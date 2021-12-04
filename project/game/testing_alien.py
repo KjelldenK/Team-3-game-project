@@ -8,11 +8,23 @@ class Tesing_Alien(Entity):
         super().__init__(image_file, scale)
 
         self.alian_bullet_list = alian_bullet_list
-        self.alian_speed = 100
-        self.shooting = False
+        self.alian_speed = 20
         self._score = 10
+        self.timer = 0
+
 
     def on_update(self, delta_time):
+
+        if self.timer < 4:
+            self.center_x += self.alian_speed * delta_time
+            self.timer + 1 * delta_time
+            self.timer += 1 * delta_time
+
+        else:
+            self.center_y -= 50
+            self.alian_speed = self.alian_speed * -1
+            self.timer = self.timer * -1 
+        
         pass
             
 
