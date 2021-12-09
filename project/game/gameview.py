@@ -1,6 +1,6 @@
 import arcade
 from game.testing_alien import Tesing_Alien
-import game.menu
+from game.score_screen import Score_screen
 from game import constants
 import random
 
@@ -133,6 +133,14 @@ class GameView(arcade.View):
 
             if bullet.top > constants.SCREEN_HEIGHT:
                 bullet.remove_from_sprite_lists()
+
+            if bullet.left < 0:
+                bullet.remove_from_sprite_lists()
+
+            if bullet.right > constants.SCREEN_WIDTH:
+                bullet.remove_from_sprite_lists()
+
+                
             
             
             
@@ -148,6 +156,18 @@ class GameView(arcade.View):
             if bullet.top < 0:
                 bullet.remove_from_sprite_lists() 
 
+        for alian in self.alian_ships:
+
+            hit_list = arcade.check_for_collision_with_list(alian, self.player_list)
+
+            if len(hit_list) > 0:
+                alian.remove_from_sprite_lists()
+                self.lives -= 1
+                arcade.play_sound(self.death_sound)
+                
+
+        
+
         # checks to see if there are any more alians and if there is not reset them
         if len(self.alian_ships) == 0:
 
@@ -155,8 +175,13 @@ class GameView(arcade.View):
                 self.open_spot.append(spot)
                 self.taken_spot.remove(spot)
 
+            wave_size = 5 * self.wave
+
+            if wave_size >= len(self.open_spot):
+                wave_size = len(self.open_spot)
+
             i = 0
-            while i < 10:
+            while i < wave_size:
 
                 self.alian = Tesing_Alien("project\images\enemy ships\enemyBlack1.png",
                 scale= 0.5, 
@@ -169,11 +194,12 @@ class GameView(arcade.View):
                 self.taken_spot.append(enemy_spot)
                 self.open_spot.remove(enemy_spot)
                 i += 1
+            self.wave += 1
         
         # if you run out of lives go back to the menu this will change later
         if self.lives <= 0:
-            menu = game.menu.MenuView()
-            self.window.show_view(menu)
+            score_view = Score_screen(self.score)
+            self.window.show_view(score_view)
 
 
 

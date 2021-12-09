@@ -34,6 +34,8 @@ class Character_Selection_View(arcade.View):
         arcade.draw_text(f"speed stat: {self.ship_list[self.ship_number].get_speed()}",constants.SCREEN_WIDTH / 2,constants.SCREEN_HEIGHT / 2 - 120, arcade.color.BLACK, font_size=15, anchor_x="center", font_name = "Kenney Rocket")
         arcade.draw_text(f"defence stat: {self.ship_list[self.ship_number].get_defence()}",constants.SCREEN_WIDTH / 2,constants.SCREEN_HEIGHT / 2 - 150, arcade.color.BLACK, font_size=15, anchor_x="center", font_name = "Kenney Rocket")
 
+        arcade.draw_text(f"User arrow keys to change ships",constants.SCREEN_WIDTH / 2 , constants.SCREEN_HEIGHT - 75, arcade.color.BLACK, font_size=15,anchor_x="center", font_name = "Kenney Rocket")
+
 
     def on_key_press(self, key, _modifiers):
         #checks to see if the player wants to go to the next ship or select the ship.
