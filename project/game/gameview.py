@@ -18,8 +18,8 @@ class GameView(arcade.View):
         self.enemy_list = None
         self.bullet_list = None
         self.menu_Background = "project\images\Backgrounds\darkPurple.png"
-        self.death_sound = arcade.load_sound("project\sounds\death_sound.ogg")
-        self.enemy_death_sound = arcade.load_sound("project\sounds\enemy_death.ogg")
+        self.death_sound = arcade.load_sound("project\sounds\death_sound.wav")
+        self.enemy_death_sound = arcade.load_sound("project\sounds\enemy_death.wav")
         self.score = 0
         self.wave = 1
         self.lives = 3
