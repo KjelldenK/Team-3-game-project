@@ -14,7 +14,7 @@ class Marcos_Ship(Ship):
         self._attack_speed = 0.8
         self._ship_speed = 350
         self._defence = 4
-        self.laser_sound = load_sound("project\sounds\sfx_laser1.ogg")
+        self.laser_sound = load_sound("project\sounds\sfx_laser1.wav")
         
 
         
